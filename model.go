@@ -49,8 +49,11 @@ type Client struct {
 	// YAML body as yaml string/bytes/struct
 	YAML interface{}
 
-	// XML body as string
+	// String body as string
 	String string
+
+	// Bytes body as byte array
+	Bytes []byte
 
 	// URLEncodedForm string/bytes/map[string][]string
 	URLEncodedForm interface{}

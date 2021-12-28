@@ -41,6 +41,7 @@ func (c *Client) initContext() *context.Context {
 		request.Proxy{Servers: c.ProxyServers, URL: c.ProxyURL},
 		request.BodyJSON{Data: c.JSON},
 		request.BodyString{Data: c.String},
+		request.BodyBytes{Data: c.Bytes},
 		request.BodyXML{Data: c.XML},
 		request.BodyYAML{Data: c.YAML},
 		request.BodyForm{Fields: c.MultipartForm.Fields, Files: c.MultipartForm.Files},

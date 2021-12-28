@@ -40,6 +40,31 @@ func (b BodyString) Valid() bool {
 	return true
 }
 
+// BodyBytes body of type []byte
+type BodyBytes struct {
+	Data []byte
+}
+
+// Apply []byte body
+func (b BodyBytes) Apply(ctx *context.Context) {
+	bBytes := bytes.NewReader(b.Data)
+	rc, ok := io.Reader(bBytes).(io.ReadCloser)
+	if !ok && bBytes != nil {
+		rc = io.NopCloser(bBytes)
+	}
+
+	ctx.Request.Body = rc
+	ctx.Request.ContentLength = int64(bytes.NewBuffer(b.Data).Len())
+}
+
+// Valid []byte body valid?
+func (b BodyBytes) Valid() bool {
+	if b.Data == nil {
+		return false
+	}
+	return true
+}
+
 // BodyJSON body of type json
 type BodyJSON struct {
 	Data interface{}
